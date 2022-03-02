@@ -1,25 +1,35 @@
 <template>
     <div class="inputBox Shadow">
-        <input type="text" v-model="newTodoItem" placeholder="Type what u have todo"
-        v-on:keyup.enter="addTodo">
+        <input type="text" v-model="newTodoItem" placeholder="야 너두 할 수 있어 - !"
+         v-on:keyup.enter="addTodo">
         <span class="addContainer" v-on:click="addTodo">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
+        <modal class="cursorControll" v-if="showModal" @close="showModal=false">
+            <h3 slot="header">에 라(Error)</h3>
+            <span slot="footer" @click="showModal =false"> 일없슈? </span>
+            <i class="classModalBtn fas fa-times" aria-hidden="true"></i>
+        </modal>
     </div>
 </template>
 <script>
+import Modal from './common/Modal.vue';
 export default {
+    components : {Modal},
     data() {
         return {
-            newTodoItem: ''
+            newTodoItem: '',
+            showModal: false
         }
     },
     methods: {
         addTodo() {
             if(this.newTodoItem !== ""){
                 var value= this.newTodoItem && this.newTodoItem.trim();
-                localStorage.setItem(this.newTodoItem, this.newTodoItem);
+                this.$emit('addTodo', value);
                 this.clearInput();
+            } else {
+                this.showModal =! this.showModal;
             }
         },
         clearInput () {
@@ -48,9 +58,13 @@ export default {
         display: block;
         width: 3rem;
         border-radius: 0 5px 5px 0;
+        cursor: progress;
     }
     .addBtn{
         color: white;
         vertical-align: middle;
+    }
+    .cursorControll{
+        cursor: progress ;
     }
 </style>

@@ -1,26 +1,23 @@
 <template>
     <section>
-        <ul>
-            <li v-for="todoItem in todoItems" :key="todoItem">
+        <transition-group name="list" tag="ul">
+            <!-- 목록에 애니매이션 적용하려면 대상태그에 :key속성을 꼭 지정하시오 -->
+            <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
                 <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                 {{todoItem}}
             <span class="removeBtn" type="button" @click="removeTodo(todoItem, index)">
                 <i class="far fa-trash-alt" aria-hidden="true"></i>
             </span>
             </li>
-        </ul>
+        </transition-group>
     </section>
 </template>
 <script>
 export default {
-    data() {
-        return {todoItems: []}
-    },
-    created() {
-        if(localStorage.length > 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                this.todoItems.push(localStorage.key(i));
-            }
+    props: ['propsdata'],
+    methods: {
+        removeTodo(todoItem, index) {
+            this.$emit('removeTodo', todoItem, index);
         }
     }
 }
@@ -50,5 +47,9 @@ export default {
     .removeBtn{
         margin-left: auto;
         color: #de4343;
+        cursor: pointer;
     }
+    .list-enter-active, .list-enter-leave {transition: all 1s;}
+    .list-enter { opacity: 0; transform: translateY(30px);}
+    /* .list-enter { opacity: 0; transform: translateY(30px);} */
 </style>
