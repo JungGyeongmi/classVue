@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+
+<script>
+  var store = new Vuex.Store({
+    state: {
+        lucky: 100
+    },
+    mutations: {
+        sync_mutation(state) {
+            console.log(state.lucky);
+        }
+    }
+  });
+
+  var vm = new Vue({
+      store: store,
+      methods: {
+        // ...Vuex.mapMutations(['sync_mutation'])
+        ...Vuex.mapMutations({alias_sync_mutation:'sync_mutation'})
+      }
+  });
+  // vm.sync_mutation();
+  vm.alias_sync_mutation();
+</script>

@@ -1,0 +1,20 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+
+<script>
+  var one_store = new Vuex.Store({
+    state: {
+        todos:[ 
+            {id:1, text:'논문쓰기', done: true},
+            {id:2, text:'책쓰기', done: false}
+        ]
+    },
+    getters: {
+        doneTodos: state => {
+            return state.todos.filter(todo => todo.done);
+        }
+    }
+  });
+
+  console.log(one_store.getters.doneTodos);
+</script>

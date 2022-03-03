@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+<script>
+  const store = new Vuex.Store({
+    state: {
+      count: 1
+    },
+    mutations: {
+      increment(state, payload) {
+        state.count += payload.amount;
+      }
+    },
+  });
+
+  store.commit({type: 'increment', amount:10});
+  console.log(store.state.count)
+</script>

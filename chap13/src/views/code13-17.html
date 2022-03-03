@@ -1,0 +1,38 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+
+<script>
+  const store = new Vuex.Store({
+    state: {count: 0},
+    mutations:{
+      increment(state) {
+        state.count++;
+      },
+      someMutation(state){
+        console.log('someMutation')
+      },
+      someOtherMutation(state){
+        console.log('someOtherMutation')
+      }
+    },
+    actions: {
+      decrement({commit}){
+        return new Promise((resolve, reject)=>{
+          setTimeout(()=>{
+            commit('someMutation')
+            resolve();
+          },1000)
+        });
+      },
+      actionB({dispatch, commit}){
+        return dispatch('actionA').then(()=>{
+          commit('someMutation')
+        })
+      },
+      actionA({commit}){
+        commit('someOtherMutation')
+      }
+
+    }
+  });
+</script>

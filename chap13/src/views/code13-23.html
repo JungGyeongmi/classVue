@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+
+<script>
+  const SOME_MUTATION = 'SOME_MUTATION';
+  const store = new Vuex.Store({
+    state: {count: 1},
+    mutations:{
+      [SOME_MUTATION](state) {
+        console.log(state.count);
+      }
+    }
+  })
+  // store.commit('SOME_MUTATION');
+  store.commit({ type: 'SOME_MUTATION'});
+  // console.log(store.state.count)
+</script>
