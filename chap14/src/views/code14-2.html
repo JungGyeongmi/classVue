@@ -1,0 +1,30 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/es6-promise"></script>
+
+<div id="app">
+    <input type="button" id="btn" value="click me-!">
+    <div class="dog">
+
+    </div>
+</div>
+<script>
+
+   const btn = document.querySelector("#btn");
+   const url = 'https://dog.ceo/api/breeds/image/random';
+
+   const getDogImages = function() {
+       axios.get(url).then(
+           (Response) => {
+               console.log(Response)
+               const imgUrl = Response.data.message;
+               const dogImage = document.createElement("img");
+               dogImage.src = imgUrl;
+               dogImage.style.height = "100px";
+               document.querySelector(".dog").appendChild(dogImage);
+            }
+        )
+   }
+   btn.addEventListener("click", getDogImages);
+</script>

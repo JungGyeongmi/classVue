@@ -1,0 +1,57 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script src="https://unpkg.com/vuex@2.0.0"></script>
+
+<div id="app">
+    <ul>
+        <li v-for="item in todos" v-if="item.done">{{ item.text }}</li>
+    </ul>
+</div>
+<script>
+    const TOGGLE_DONE = 'todos/TOGGLE_DONE'
+
+    const todosModule = {
+        state: {
+            todos: [
+                { id: 1, text: '논문 쓰기', done: false },
+                { id: 2, text: '민대리님 미안해요', done: true },
+                { id: 3, text: '허부장님 힘내주세요!!', done: true }
+            ]
+        },
+        mutations: {
+            [TOGGLE_DONE](state, payload) {
+                state.todos[payload.index].done = payload.done
+            }
+        }
+    }
+
+    const store = new Vuex.Store({
+        modules: {
+            todo: todosModule
+        }
+    });
+
+    var vm = new Vue({
+        el: "#app",
+        store: store,
+        computed: {
+            ...Vuex.mapState({
+                todos: root_module => root_module.todo.todos
+            })
+        }
+    });
+
+    const myModuleA = {
+        state: { count: 0 },
+        mutations: {
+            increment(state) {
+                state.count++
+            }
+        },
+
+        getters: {
+            doubleCount(state) {
+                return state.count * 2
+            }
+        }
+    }
+</script>

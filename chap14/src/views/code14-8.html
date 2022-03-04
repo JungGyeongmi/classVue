@@ -1,0 +1,19 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/es6-promise"></script>
+<!-- promise란 비동기 작업이 맞이할 미래의 완료 또는 실패와 
+        그 결과 값을 나타내기 위한 객체 -->
+<div id="app">
+</div>
+<script>
+    // put  : database에 들어가 있는 내용을 갱신(update 한다)
+
+    // axios.put() 기본 문법
+    axios.put("/replace", {
+        title: 'value', content: 'value'
+    })
+    .then(function (response) {
+        //response 인자를 받아서 처리
+    }).catch(function (ex){
+        //ex 인자를 받아서 에러 처리
+    })
+</script>
