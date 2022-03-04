@@ -19,7 +19,10 @@
     }
 
     const Comp = {
-        template: '<div>vue {{ no }}</div>',
+        template: `<div>vue {{ no }}
+          <br>
+          {{title}}
+          </div>`,
         props: ['no']
     }
 
@@ -28,7 +31,7 @@
         routes: [
             {
                 path: '/board', name: "board", component: BoardComp, children: [
-                    { path: ":no", name: "article", component: Comp, props: true }
+                    { path: ":no&:title", name: "article", component: Comp, props: true }
                 ]
             }
         ]
